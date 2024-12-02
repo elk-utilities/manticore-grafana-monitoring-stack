@@ -13,8 +13,8 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
-    # volumes:
-    #   - grafana_data:/var/lib/grafana
+    volumes:
+      - ./provisioning/datasources/prometheus.yml:/etc/grafana/provisioning/datasources/prometheus.yml:ro
     networks:
       - monitoring_network
 
@@ -25,7 +25,6 @@ services:
       - "9090:9090"
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
-      - ./provisioning/datasources/prometheus.yml:/etc/grafana/provisioning/datasources/prometheus.yml:ro
     command:
       - --config.file=/etc/prometheus/prometheus.yml
     networks:
