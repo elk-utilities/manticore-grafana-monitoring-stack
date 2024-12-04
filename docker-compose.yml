@@ -19,11 +19,12 @@ services:
       - monitoring_network
 
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:v2.49.1
     container_name: prometheus
     ports:
       - "9090:9090"
     volumes:
+      - ./prometheus:/prometheus # Persist prometheus data between updates
       - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
     command:
       - --config.file=/etc/prometheus/prometheus.yml
